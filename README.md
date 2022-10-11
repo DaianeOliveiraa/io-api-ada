@@ -1,42 +1,33 @@
 ### Squad 4 - Itália
 
 ```bash
-Caique Vidal Freitas
-Cristiano Roberto Oliveira
 Daiane Leandro Oliveira
-Davi Carrer
-Eric Leonidas G Almeida
-Joao Lucas Cruz Lopes
 ```
 
-## Exercício em GRUPO:
-### Feature de criar mapas astrais em batches
-#### bonus - adicionado endpoint que recebe .txt e devolve zip com todos os mapas.
-```bash
+## Exercício Individual:
+### Criação de relatórios astrais em paralelo
+
 POST http://localhost:8080/api/mapa  
 RequestBody MultipartFile file
 ```
 
 #### Enunciado
-Este exercício é uma continuacao do projeto do Mapa Astral iniciado aula passada.
+Utilizar o exercicio de leitura do arquivo com os nomes e criacao de relatorios para este exercicio. 
+Se tiver feito em grupo, copie/ fork o projeto de seu grupo para seu repositorio pessoal do GitHub.
 
-1) criar arquivo com nome dos participantes de cada grupo com as seguintes informacoes:
+Esta tarefa consiste em utilizar parallel streams ou CompletableFuture para ler e criar os relatorios todos 
+ao mesmo tempo.
 
-Nome
-ZoneId de nascimento (Local)
-Data de nascimento
-Ex.: Joarez da Silva,America/Sao_Paulo,1990-08-30 Jarred Jefferson,America/Sao_Paulo,1999-12-15
+Este exercicio é induvidual e isso conclui o projeto do mapa astral.
 
-2) Ler arquivo utilizando a API java.nio e salvar em um novo objeto
+Prazo para entrega: 11/10
 
-3) Fazer o mapa astral + funcionalidades
+Entrega:
 
-4) Criar 1 arquivo para cada usuario da lista inicial com um relatorio com mapa quantico.
+Entregar em uma branch separada da master, para que o professor consiga avaliar o que foi 
+feito para esse exercicio isoladamente.
 
-Critérios de avaliacao:
+Criterios de avaliacao:
 
-Uso correto da API de streams - 5 pontos
-
-Uso correto da API java.nio para arquivos - 10 pontos
-
-Uso de OO, com criacao de classes e métodos com nomes significativos - 5 pontos
+10 pontos pelo uso correto de OO, nomes sugnificativos e codigo limpo. 
+10 pontos pelo uso de paralelismo na a execucao da tarefa.

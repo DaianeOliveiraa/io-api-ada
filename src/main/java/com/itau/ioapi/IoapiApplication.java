@@ -29,27 +29,37 @@ public class IoapiApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+        long startTime = System.currentTimeMillis();
+
         Path path = Paths.get(HOME_DIR, "/mapas/mapa-virgulas.txt");
 
         // Desserializa o arquivo
         List<Pessoa> pessoas = pessoaFileSystemService.desserialize(path);
 
         // Imprime as informaçoes no console
-        pessoas.forEach(signosService::imprimirInformacoesSignos);
+        pessoas.parallelStream().forEach(signosService::imprimirInformacoesSignos);
 
         // Serializa o mapa quantico de cada pessoa
-        pessoas.stream()
-                .parallel()
+        pessoas.parallelStream()
                 .map(signosService::getInformacoesSignosEmString)
+                .parallel()
                 .forEach(getConsumerForSerialize());
+
+        long durationParallelStream = System.nanoTime() - startTime / 1000000;
+
+        System.out.printf(" \n Processado %d arquivos em %d ms \n: ", pessoas.size(), durationParallelStream);
     }
+
 
     private Consumer<List<String>> getConsumerForSerialize() {
         return stringList -> {
             Path newPathForPessoa = Paths.get(HOME_DIR, "mapas", "quantico", stringList.get(0) + ".txt");
             try {
+                System.out.println("Gerando novo arquivo " + newPathForPessoa);
+                Thread.sleep(1000);
                 pessoaFileSystemService.serialize(stringList, newPathForPessoa);
-            } catch (IOException e) {
+            } catch (InterruptedException | IOException e) {
                 throw new RuntimeException(e);
             }
         };

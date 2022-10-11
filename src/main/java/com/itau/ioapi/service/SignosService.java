@@ -10,7 +10,7 @@ import java.util.List;
 public class SignosService {
 
     public void imprimirInformacoesSignos(Pessoa pessoa) {
-        getInformacoesSignosEmString(pessoa).forEach(System.out::println);
+        getInformacoesSignosEmString(pessoa).parallelStream().forEach(System.out::println);
     }
 
     public List<String> getInformacoesSignosEmString(Pessoa pessoa) {
@@ -23,6 +23,13 @@ public class SignosService {
         stringList.add(String.format("SIGNO LUNAR: %s", pessoa.getSignoLunar()));
         stringList.add(String.format("NASCEU EM ANO BISSEXTO: %s", pessoa.getAnoBissexto()));
         stringList.add(String.format("=====================%n"));
+
+        try {
+            System.out.println("Montando arquivo " + stringList + "Thread: " + Thread.currentThread().getName());
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         return stringList;
     }
